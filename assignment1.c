@@ -21,8 +21,6 @@ int hash(char name[]){
 void insert(char name[],char class_type[]){
 }
 
-
-
 void search(char name[],char class_type[]){
 }
 
@@ -46,9 +44,11 @@ int main(){
 			switch(choice){
 			case 1:
 			printf("Enter tuples:");
-			gets(name);
-			gets(class_type);
-			printf("name%s\n",name);
+			scanf("%s",&name);
+	        	scanf("%s",&class_type);
+	        	//printf("name:%s\n",name);
+	        	//printf("type:%s\n",class_type);
+	        	insert(name,class_type);
 
 			break;
 
