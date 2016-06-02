@@ -27,10 +27,6 @@ void insert(char name[],char class_type[]){
     printf("name is:%s and type is:%s\n",name,class_type);
     if(p[h]==NULL){
             p[h] = (node*)malloc(sizeof(node));
-            /*for(i=0;name[i]!='\0';i++)
-                p[h]->name[i] = name[i];
-            for(i=0;class_type[i]!='\0';i++)
-                p[h]->class_type[i] = class_type[i];*/
             strcpy(p[h]->name,name);
             strcpy(p[h]->class_type,class_type);
             p[h]->next = NULL;
@@ -38,11 +34,6 @@ void insert(char name[],char class_type[]){
     }
     else{
             temp = (node*)malloc(sizeof(node));
-            /*for(i=0;name[i]!='\0';i++)
-                p[h]->name[i] = name[i];
-            fflush(stdin);
-            for(i=0;class_type[i]!='\0';i++)
-                p[h]->class_type[i] = class_type[i];*/
             strcpy(p[h]->name,name);
             strcpy(p[h]->class_type,class_type);
             fflush(stdin);
@@ -52,7 +43,12 @@ void insert(char name[],char class_type[]){
     }
 }
 
-void search(char name[],char class_type[]){
+int search(char name[],char class_type[]){
+    int j=hash(name);
+        if(strcmp(p[j]->name,name)==0 && strcmp(p[j]->class_type,class_type)==0)
+            return 1;
+        else
+            return 0;
 }
 
 void show(){
@@ -75,6 +71,7 @@ void show(){
 void update(char name[],char class_type[],char update){
 }
 
+
 int main(){
 	int choice;
 	char name[100];
@@ -91,20 +88,23 @@ int main(){
 			printf("Enter tuples:\n");
 			scanf("%s",name);
 			scanf("%s",class_type);
-			//fgets(name,100,stdin);
-            //fgets(class_type,100,stdin);
             insert(name,class_type);
-
 			break;
 
 			case 2:
-			printf("Enter tuples");
+			printf("Enter tuples:\n");
+			scanf("%s",name);
+			scanf("%s",class_type);
+			if(search(name,class_type)==1)
+                printf("FOUND\n");
+            else
+                printf("NOT FOUND\n");
 
 
 
 			break;
 			case 3:
-			printf("Enter tuples");
+			printf("Enter tuples:\n");
 
 
 
@@ -114,7 +114,7 @@ int main(){
 			break;
 
 			case 5:
-			printf("Enter tuples");
+			printf("Enter tuples:\n");
 
 			break;
 
