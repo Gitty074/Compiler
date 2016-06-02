@@ -60,7 +60,6 @@ void show(){
             temp=p[i];
             if(temp==NULL){
                 printf("%d null null\n",i);
-
             }
             else{
                 while(temp!=NULL){
@@ -74,7 +73,30 @@ void show(){
 void update(char name[],char class_type[],char update){
 }
 
+void del(char name[],char class_type[]){
+    node *temp,*temp1;
+    int location = hash(name);///using hash() to find the desired node
+    if(p[location]==NULL)
+        printf("NOT FOUND\n");
+    else if(strcmp(p[location]->name,name)==0 && strcmp(p[location]->class_type,class_type)==0){
+        temp = p[location];
+        p[location] = p[location]->next;
+        free(temp);
+    }
+    else{
+        temp = p[location];
+        while(temp->next!=NULL && strcmp(temp->next->name,name)!=0 && strcmp(temp->next->class_type,class_type)!=0)
+            temp = temp->next;
+        if(temp->next==NULL)
+            printf("NOT FOUND\n");
+        else{
+            temp1 = temp->next;
+            temp->next = temp1->next;
+            free(temp1);
+        }
+    }
 
+}
 int main(){
 	int choice;
 	char name[100];
@@ -102,16 +124,15 @@ int main(){
                 printf("FOUND\n");
             else
                 printf("NOT FOUND\n");
-
-
-
 			break;
+
 			case 3:
 			printf("Enter tuples:\n");
-
-
-
+			scanf("%s",name);
+			scanf("%s",class_type);
+            del(name,class_type);
 			break;
+
 			case 4:
 			    show();
 			break;
