@@ -34,12 +34,10 @@ void insert(char name[],char class_type[]){
     }
     else{
             temp = (node*)malloc(sizeof(node));
-            strcpy(p[h]->name,name);
-            strcpy(p[h]->class_type,class_type);
-            fflush(stdin);
-            temp->next = NULL;
-            prev->next = temp;
-            prev = temp;
+            strcpy(temp->name,name);
+            strcpy(temp->class_type,class_type);
+            temp->next = p[h];
+            p[h] = temp;
     }
 }
 
