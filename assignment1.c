@@ -70,7 +70,13 @@ void show(){
     }
 }
 
-void update(char name[],char class_type[],char update){
+void updatef(char name[],char class_type[],char updated_type[]){
+    int index = hash(name);
+    node *temp;
+    temp = p[index];
+    while(temp!=NULL && strcmp(temp->name,name)!=0 && strcmp(temp->class_type,class_type)!=0 )
+        temp = temp->next;
+    strcpy(temp->class_type,updated_type);
 }
 
 void del(char name[],char class_type[]){
@@ -101,7 +107,7 @@ int main(){
 	int choice;
 	char name[100];
 	char class_type[100];
-	char update;
+	char update[100];
 	int i,j;
 
 	while(1){
@@ -110,27 +116,27 @@ int main(){
 			scanf("%d",&choice);
 			switch(choice){
 			case 1:
-			printf("Enter tuples:\n");
-			scanf("%s",name);
-			scanf("%s",class_type);
-            insert(name,class_type);
+                printf("Enter tuples:\n");
+                scanf("%s",name);
+                scanf("%s",class_type);
+                insert(name,class_type);
 			break;
 
 			case 2:
-			printf("Enter tuples:\n");
-			scanf("%s",name);
-			scanf("%s",class_type);
-			if(search(name,class_type)==1)
-                printf("FOUND\n");
-            else
-                printf("NOT FOUND\n");
+                printf("Enter tuples:\n");
+                scanf("%s",name);
+                scanf("%s",class_type);
+                if(search(name,class_type)==1)
+                    printf("FOUND\n");
+                else
+                    printf("NOT FOUND\n");
 			break;
 
 			case 3:
-			printf("Enter tuples:\n");
-			scanf("%s",name);
-			scanf("%s",class_type);
-            del(name,class_type);
+                printf("Enter tuples:\n");
+                scanf("%s",name);
+                scanf("%s",class_type);
+                del(name,class_type);
 			break;
 
 			case 4:
@@ -138,12 +144,18 @@ int main(){
 			break;
 
 			case 5:
-			printf("Enter tuples:\n");
-
+                printf("Enter tuples to update:\n");
+                scanf("%s",name);
+                scanf("%s",class_type);
+                printf("Enter new type:");
+                scanf("%s",update);
+                updatef(name,class_type,update);
 			break;
 
 			case 6:
-			break;
+            exit(0);
+            default:
+                exit(0);
 
 		}
 	}
