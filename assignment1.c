@@ -43,10 +43,15 @@ void insert(char name[],char class_type[]){
 
 int search(char name[],char class_type[]){
     int j=hash(name);
-        if(strcmp(p[j]->name,name)==0 && strcmp(p[j]->class_type,class_type)==0)
+    node *temp;
+    temp = p[j];
+    while(temp!=NULL){
+        if(strcmp(temp->name,name)==0 && strcmp(temp->class_type,class_type)==0)
             return 1;
         else
-            return 0;
+            temp = temp->next;
+        }
+        return 0;
 }
 
 void show(){
